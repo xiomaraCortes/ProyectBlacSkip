@@ -12,79 +12,79 @@
                     <div class="field-group">
                         <span class="icons icon-user"></span>
                         <input class="form-Field" type="text" id="name" formControlName="name" placeholder="Nombre">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-user"></span>
                         <input class="form-Field" type="text" id="lastName" formControlName="lastName"  placeholder="Apellidos">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-envelop"></span>
                         <input class="form-Field" type="email" id="email" formControlName="email"  placeholder="Correo Electrónico">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-phone"></span>
                         <input class="form-Field" type="tel" id="phone" formControlName="phone"  placeholder="Número de teléfono">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-location"></span>
                         <input class="form-Field" type="tel" id="code"  (keyup)="getCodes()" formControlName="code" placeholder="Código postal">
+                        <span class="txt-alert"> Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert"> Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-location"></span>
-                        <input class="form-Field" *ngIf="!multipleColonies" type="text" id="colonies" formControlName="colonies" placeholder="Colonia">
+                        <input class="form-Field" *ngIf="!multipleColonies" type="text" id="colonies" formControlName="coloniesField" placeholder="Colonia">
+                        <select class="form-Field" *ngIf="multipleColonies" formControlName="coloniesField" >
+                            <option disabled selected value="">
+                                Selecciona tu colonia
+                            </option>
+                            <option *ngFor="let colonie of coloniesGroup" [value]="colonie.value">
+                                {{colonie}}
+                            </option>
+                        </select>
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <select *ngIf="multipleColonies" formControlName="colonies" >
-                        <option disabled selected value="">
-                            Selecciona tu colonia
-                        </option>
-                        <option *ngFor="let colonie of coloniesGroup" [value]="colonie.value">
-                                   {{colonie}}
-                        </option>
-                    </select>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-location"></span>
                         <input class="form-Field" type="text" id="state" formControlName="state" placeholder="Estado/Región">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-location"></span>
                         <input class="form-Field" type="text" id="city" formControlName="city" placeholder="Ciudad">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-location"></span>
                         <input class="form-Field" type="text" id="town" formControlName="town" placeholder="Delegación o municipio">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
                 <label class="lbl-group">
                     <div class="field-group">
                         <span class="icons icon-map2"></span>
                         <input class="form-Field" type="text" id="street" formControlName="street" placeholder="Calle">
+                        <span class="txt-alert">Tienes un error en este campo</span>
                     </div>
-                    <span class="txt-alert">Tienes un error en este campo</span>
                 </label>
             </div>
             <div class="groupButton">
@@ -95,6 +95,8 @@
                 <input class="check-form" checked id="billingAddress" formControlName="billingAddress" type="checkbox">
                 <span class="check-text"> Utilizar como dirección de facturación.</span>
             </label>
+            <p *ngIf="success">Se ha guardado con éxito tus datos.</p>
+            <p *ngIf="error!= '' "> Lo sentimos! tus datos no se han enviado:{{error}} </p>
         </form>
     </div>
 </div>

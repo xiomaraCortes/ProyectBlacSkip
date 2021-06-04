@@ -17,7 +17,8 @@ export class UserFormComponent implements OnInit {
   public multipleColonies: Boolean = false;
   public loading: Boolean = false;
   public coloniesGroup: any = [];
-  public error: any
+  public error: any = ""
+  public success : Boolean = false;
   
   constructor
   (
@@ -38,6 +39,8 @@ export class UserFormComponent implements OnInit {
       this.UserForm.reset()
       this.UserForm.enable()
       this.loading = false
+      this.success = true
+      this.coloniesGroup = []
       
     },err=>{
       if(err){
@@ -54,7 +57,7 @@ export class UserFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]{6,12}$')]],
       code: ['', [Validators.required, Validators.pattern('[0-9]{5,12}$')]],
-      colonies: ['', [Validators.required, Validators.pattern('^[A-Za-z\ \ñäáàëéèíìöóòúùÄÁÀËÉÈÍÌÖÓÒÚÙÑñ]+'), Validators.minLength(3), Validators.maxLength(50)]],
+      coloniesField: ['', [Validators.required, Validators.pattern('^[A-Za-z\ \ñäáàëéèíìöóòúùÄÁÀËÉÈÍÌÖÓÒÚÙÑñ]+'), Validators.minLength(3), Validators.maxLength(50)]],
       state: ['', [Validators.required, Validators.pattern('^[A-Za-z\ \ñäáàëéèíìöóòúùÄÁÀËÉÈÍÌÖÓÒÚÙÑñ]+'), Validators.minLength(3), Validators.maxLength(50)]],
       city: ['', [Validators.required, Validators.pattern('^[A-Za-z\ \ñäáàëéèíìöóòúùÄÁÀËÉÈÍÌÖÓÒÚÙÑñ]+'), Validators.minLength(3), Validators.maxLength(50)]],
       town: ['', [Validators.required, Validators.pattern('^[A-Za-z\ \ñäáàëéèíìöóòúùÄÁÀËÉÈÍÌÖÓÒÚÙÑñ]+'), Validators.minLength(3), Validators.maxLength(50)]],
@@ -71,7 +74,7 @@ export class UserFormComponent implements OnInit {
         console.log(data);
         if(data== "" || data==[] || !data){
           this.UserForm.patchValue({          
-            colonies:'',
+            coloniesField:'',
             state:'',
             city:'',
             town:'',
@@ -82,11 +85,11 @@ export class UserFormComponent implements OnInit {
           //data.colonies.length>1 ? this.multipleColonies=true : this.multipleColonies=false
           if( data.colonies && data.colonies.length>1 && typeof data.colonies == 'object'){
             this.multipleColonies = true
-            this.coloniesGroup = data.colonies[0]
+            this.coloniesGroup = data.colonies
           }else{
             this.multipleColonies=false
             this.UserForm.patchValue({
-              colonies:data.colonies.toString()
+              coloniesField:data.colonies.toString()
             })
           }
           this.UserForm.patchValue({          

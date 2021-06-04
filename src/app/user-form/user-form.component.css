@@ -28,7 +28,6 @@
 .icons{
     background-color: black;
     color: white;
-    width: 35px;
     font-size: 18px;
     padding: 5px 0px;
     display:inline-block;
@@ -47,9 +46,9 @@
 }
 
 .field-group{
-    justify-content:flex-start;
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 20% 80%;
 }
 
 .txt-alert{
@@ -59,7 +58,8 @@
 }
 
 .form-Field.ng-invalid.ng-touched ~ .txt-alert{
-    display:block;
+    display: block;
+    grid-column: 1 / span 2;
 }
 .button-form{
     background-color: black;
