@@ -1,0 +1,34 @@
+<div class="order-card">
+    <div class="order-card-head">
+        <h1 >RESUMEN DE LA ORDEN</h1>
+    </div>
+    <div class="order-card-body">
+        <section *ngFor="let product of products" class="order-product">
+            <img class="product-img" src="{{product.image}}">
+            <p class="product-name">{{product.name}} </p>
+            <p class="product-price">{{product.price | currency:"$"}}</p>
+            
+        </section>
+        <div class="button-container">
+            <button class="btn-edit">Editar</button>
+        </div>
+    </div>
+    <div class="order-card-footer">
+        <div class="order-subtotal">
+            <p class="order-calc">
+                <span>SUBTOTAL</span>
+                <span>$13,974 <i>.00</i></span>
+            </p>
+            <p class="order-calc">
+                <span>ENVÍO</span>
+                <span>A calcular</span>
+            </p>
+        </div>
+        <div class="order-total">
+            <p class="order-calc">
+                <span>TOTAL</span>
+                <span>$13,974 <i>.00</i></span>
+            </p>
+        </div>
+    </div>
+</div>
